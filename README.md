@@ -1,4 +1,5 @@
-Converts graph stack text into dot format
+Creates, signs, and serves floppy PNG based web sites
+
 
 Example use of create and web_deal:
 
