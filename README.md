@@ -4,9 +4,9 @@ Example use of create and web_deal:
 
 create(site,domain,backup,emoji)  
 site is an object that holds web content  
-domain is the website domain
+domain is the website domain  
 backup is the path to a back folder  
-emoji is the emoji for the website title   
+emoji is the emoji for the website title
 
 
 ```javascript
