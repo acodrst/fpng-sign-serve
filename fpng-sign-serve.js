@@ -1,5 +1,6 @@
 import { fpng } from "fpng";
 import * as base64 from "byte-base64";
+const metadata=JSON.parse(Deno.readTextFileSync("assets/metadata.json"));
 const dt = new Date();
 const tss = dt.toISOString().replaceAll(":", "").replaceAll("-","").replaceAll(".","");
 export async function create(site, domain, backup, emoji) {
@@ -83,17 +84,19 @@ export async function create(site, domain, backup, emoji) {
       Deno.readTextFileSync(`assets/bootloader.template.js`)
         .replaceAll("thisistss", tss)
         .replaceAll("thisisadler", a32h)
-        .replaceAll("thisisemoji", emoji)
         .replaceAll("thisistextlength", st.length)
         .replaceAll("thisislength", fp_obj.ln),
     );
+    for (let i in metadata){
     Deno.writeTextFileSync(
-      `${domain}.page.html`,
+      `${i}.page.html`,
       Deno.readTextFileSync(`assets/pageops.html`)
-        .replaceAll("thisisemoji", emoji)
+        .replace("<title></title>",`<title>${metadata[i].title}</title>`)
+        .replace(`<meta name="description" content="">`,`<meta name="description" content="${metadata[i].description}">`)
         .replaceAll("thisistss", tss)
         .replaceAll("thisisadler", a32h)
     );
+  }
   }
 }
 export function web_deal(req, domain) {
