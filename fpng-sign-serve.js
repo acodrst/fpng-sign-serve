@@ -3,7 +3,7 @@ import * as base64 from "byte-base64";
 const metadata=JSON.parse(Deno.readTextFileSync("assets/metadata.json"));
 const dt = new Date();
 const tss = dt.toISOString().replaceAll(":", "").replaceAll("-","").replaceAll(".","");
-export async function create(site, domain, backup, emoji) {
+export async function create(site, domain, backup) {
   const st = JSON.stringify(site);
   Deno.writeTextFileSync("site.txt", `let site=${st}\n`);
   const text = Deno.readTextFileSync("site.txt") +
