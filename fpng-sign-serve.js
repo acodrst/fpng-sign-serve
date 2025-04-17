@@ -3,7 +3,7 @@ import * as base64 from "byte-base64";
 const metadata=JSON.parse(Deno.readTextFileSync("assets/metadata.json"));
 const dt = new Date();
 const tss = dt.toISOString().replaceAll(":", "").replaceAll("-","").replaceAll(".","");
-export async function create(site, domain, backup) {
+export async function create(site,backup) {
   const st = JSON.stringify(site);
   Deno.writeTextFileSync("site.txt", `let site=${st}\n`);
   const text = Deno.readTextFileSync("site.txt") +
@@ -99,11 +99,11 @@ export async function create(site, domain, backup) {
   }
   }
 }
-export function web_deal(req, domain) {
+export function web_deal(req) {
   if (req.method == "GET") {
     const u = new URL(req.url);
     const page = u.pathname == "/"
-      ? `${domain}.page.html`
+      ? `${Object.keys(metadata)[0]}.page.html`
       : u.pathname.replace("/", "");
     let npg;
     let response;
