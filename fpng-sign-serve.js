@@ -79,14 +79,13 @@ export async function create(site,backup) {
       }
     }
     console.log(`${tss}-${a32h}`);
-    Deno.writeTextFileSync(
-      `${tss}-${a32h}.js`,
-      Deno.readTextFileSync(`assets/bootloader.template.js`)
+    const nboot=Deno.readTextFileSync(`assets/bootloader.template.js`)
         .replaceAll("thisistss", tss)
         .replaceAll("thisisadler", a32h)
         .replaceAll("thisistextlength", st.length)
-        .replaceAll("thisislength", fp_obj.ln),
-    );
+        .replaceAll("thisislength", fp_obj.ln)
+    Deno.writeTextFileSync(`${tss}-${a32h}.js`,nboot);
+    Deno.writeTextFileSync(`${backup}${tss}-${a32h}.js`,nboot);
     for (let i in metadata){
     Deno.writeTextFileSync(
       `${i}.page.html`,
